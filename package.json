@@ -2,6 +2,9 @@
   "name": "snap-map-private-api-example",
   "version": "0.0.1",
   "description": "Example for snap-map-private-api",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "express": "^4.16.2",
     "axios": "^0.17.1",

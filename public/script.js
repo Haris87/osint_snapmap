@@ -28,40 +28,18 @@ function sendRequest(method, url, body) {
 function displaySnaps(snaps) {
   var container = document.getElementById("container");
   container.innerHTML = "";
-  console.log(snaps.length);
+  console.log("SNAPS", snaps);
   snaps.forEach(function (snap) {
-    console.log(hasVideo(snap));
     container.appendChild(
-      hasVideo(snap)
-        ? createVideoElement(getVideo(snap))
-        : createImageElement(getImage(snap))
+      isVideo(snap)
+        ? createVideoElement(snap.url)
+        : createImageElement(snap.url)
     );
   });
 }
 
-function hasVideo(snap) {
-  if (snap.snapInfo.hasOwnProperty("snapMediaType")) {
-    return snap.snapInfo.snapMediaType == "SNAP_MEDIA_TYPE_VIDEO";
-  }
-  return false;
-}
-
-function getVideo(snap) {
-  console.log(snap.snapInfo);
-  var info = snap.snapInfo;
-  return info.streamingMediaInfo.prefixUrl + info.streamingMediaInfo.mediaUrl;
-}
-
-function getImage(snap) {
-  console.log(snap.snapInfo);
-  var info = snap.snapInfo;
-  if (info.streamingMediaInfo.hasOwnProperty("prefixUrl")) {
-    return (
-      info.streamingMediaInfo.prefixUrl + info.streamingMediaInfo.previewUrl
-    );
-  } else if (info.hasOwnProperty("publicMediaInfo")) {
-    return info.publicMediaInfo.publicImageMediaInfo.mediaUrl;
-  }
+function isVideo(snap) {
+  return snap.type === "VIDEO";
 }
 
 function fetchData() {
@@ -70,9 +48,10 @@ function fetchData() {
 
   sendRequest("GET", "http://localhost:3000/map?lat=" + lat + "&long=" + long)
     .then(function (response) {
+      console.log(response);
       response = JSON.parse(response);
       console.log("RESPONSE", response);
-      var snaps = response.elements;
+      var snaps = response;
       displaySnaps(snaps);
     })
     .catch(function (error) {
