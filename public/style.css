@@ -1,0 +1,13 @@
+.container {
+  float: left;
+}
+
+video {
+  height: 300px;
+  margin: 10px;
+}
+
+img {
+  height: 300px;
+  margin: 10px;
+}

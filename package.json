@@ -1,0 +1,10 @@
+{
+  "name": "snap-map-private-api-example",
+  "version": "0.0.1",
+  "description": "Example for snap-map-private-api",
+  "dependencies": {
+    "express": "^4.16.2",
+    "axios": "^0.17.1",
+    "bluebird": "^3.5.1"
+  }
+}
