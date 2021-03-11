@@ -1,5 +1,5 @@
 const express = require("express");
-const snapMap = require("../lib");
+const snapMap = require("./snap-api");
 const fs = require("fs");
 const path = require("path");
 const app = express();
@@ -13,7 +13,7 @@ app.get("/test", (req, res) => {
 app.get("/map", (req, res) => {
   console.log(req.query);
   snapMap
-    .getPlaylist(Number(req.query.lat), Number(req.query.long), 1000, 12)
+    .getPlaylist(Number(req.query.lat), Number(req.query.long), 500, 12)
     .then(function (response) {
       console.log(response);
 
