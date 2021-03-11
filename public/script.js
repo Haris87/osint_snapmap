@@ -1,15 +1,27 @@
-function createVideoElement(src) {
+function createVideoElement(snap) {
+  var div = document.createElement("div");
+  var container = document.getElementById("container");
+
+  container.appendChild(div);
   var video = document.createElement("video");
-  video.src = src;
+  video.src = snap.url;
   video.controls = true;
   video.autoplay = false;
-  return video;
+  div.appendChild(video);
+  div.appendChild(document.createTextNode(new Date(snap.datetime * 1000)));
+  return div;
 }
 
-function createImageElement(src) {
+function createImageElement(snap) {
+  var div = document.createElement("div");
+  var container = document.getElementById("container");
+
+  container.appendChild(div);
   var image = document.createElement("img");
-  image.src = src;
-  return image;
+  image.src = snap.url;
+  div.appendChild(image);
+  div.appendChild(document.createTextNode(new Date(snap.datetime * 1000)));
+  return div;
 }
 
 function sendRequest(method, url, body) {
@@ -30,11 +42,7 @@ function displaySnaps(snaps) {
   container.innerHTML = "";
   console.log("SNAPS", snaps);
   snaps.forEach(function (snap) {
-    container.appendChild(
-      isVideo(snap)
-        ? createVideoElement(snap.url)
-        : createImageElement(snap.url)
-    );
+    isVideo(snap) ? createVideoElement(snap) : createImageElement(snap);
   });
 }
 

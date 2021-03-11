@@ -19,7 +19,7 @@ app.get("/map", (req, res) => {
     })
     .catch(function (error) {
       console.log(error);
-      return res.send("ERROR");
+      return res.send({ error: error });
     });
 });
 
