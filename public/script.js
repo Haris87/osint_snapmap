@@ -1,5 +1,7 @@
 function createVideoElement(snap) {
   var div = document.createElement("div");
+  div.classList.add("snap");
+  var br = document.createElement("br");
   var container = document.getElementById("container");
 
   container.appendChild(div);
@@ -8,19 +10,23 @@ function createVideoElement(snap) {
   video.controls = true;
   video.autoplay = false;
   div.appendChild(video);
-  div.appendChild(document.createTextNode(new Date(snap.datetime * 1000)));
+  div.appendChild(br);
+  div.appendChild(document.createTextNode(getDate(snap)));
   return div;
 }
 
 function createImageElement(snap) {
   var div = document.createElement("div");
+  div.classList.add("snap");
+  var br = document.createElement("br");
   var container = document.getElementById("container");
 
   container.appendChild(div);
   var image = document.createElement("img");
   image.src = snap.url;
   div.appendChild(image);
-  div.appendChild(document.createTextNode(new Date(snap.datetime * 1000)));
+  div.appendChild(br);
+  div.appendChild(document.createTextNode(getDate(snap)));
   return div;
 }
 
@@ -35,6 +41,10 @@ function sendRequest(method, url, body) {
     xhr.open(method, url);
     xhr.send();
   });
+}
+
+function getDate(snap) {
+  return new Date(Number(snap.datetime)).toUTCString();
 }
 
 function displaySnaps(snaps) {

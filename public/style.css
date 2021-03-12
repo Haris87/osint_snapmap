@@ -1,13 +1,24 @@
 .container {
-  float: left;
+  float: left !important;
 }
 
-video {
-  height: 300px;
+.snap {
+  display: inline-block;
+  border: 1px solid black;
+  height: 500px;
+  width: 200px;
   margin: 10px;
 }
 
-img {
+.snap video {
+  width: 100%;
+}
+
+.snap img {
+  width: 100%;
+}
+
+/* img {
   height: 300px;
   margin: 10px;
-}
+} */
